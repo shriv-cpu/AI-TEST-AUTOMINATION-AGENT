@@ -5,9 +5,20 @@ import { UserDetailContext } from '@/app/context/UserDetailContext'
 import React, { useContext } from 'react'
 import { Card, CardContent } from "../ui/card";
 import EmptyWorkspace from "./EmptyWorkspace";
+import { Router } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+
 
 function WorkspaceBody() {
+  const router = useRouter()
   const { userDetail } = useContext(UserDetailContext)
+
+  const onAddRepo = () => {
+    window.location.href = '/api/github'
+  }
+
+
   return (
     <div>
       <div className='flex justify-between items-center'>
@@ -24,7 +35,7 @@ function WorkspaceBody() {
         />
         <h2 className="text-lg">connect github & add repo</h2>
 
-        <div><button className=" text-white bg-black  border rounded-lg">+ ADD</button></div>
+        <div><button onClick={onAddRepo} className=" text-white bg-black px-2 rounded-lg hover:bg-gray-800 transition-all duration-300 cursor-pointer ">+ ADD</button></div>
       </Card>
       <Card className=" mt-10">
         <CardContent>

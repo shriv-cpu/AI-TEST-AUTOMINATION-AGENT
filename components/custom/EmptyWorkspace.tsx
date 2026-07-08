@@ -16,7 +16,7 @@ const EmptyWorkspace = () => {
       <h2 className="text-2xl font-bold">No Repo Connected</h2>
       <p className="text-gray-500">connect your github account and add a repo to run test cases</p>
       <Button className="bg-black text-white hover:bg-gray-800">
-  <Link  href="/github" className="text-white hover:text-gray-300">Connect Github</Link>
+  <Link href="/api/github" className="text-white hover:text-gray-300">Connect Github</Link>
 </Button>
     </div>
   );
