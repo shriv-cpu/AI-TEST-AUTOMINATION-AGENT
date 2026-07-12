@@ -7,6 +7,7 @@ import { Card, CardContent } from "../ui/card";
 import EmptyWorkspace from "./EmptyWorkspace";
 import { Router } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { RepoDialog } from "./RepoDialog";
 
 
 
@@ -35,7 +36,7 @@ function WorkspaceBody() {
         />
         <h2 className="text-lg">connect github & add repo</h2>
 
-        <div><button onClick={onAddRepo} className=" text-white bg-black px-2 rounded-lg hover:bg-gray-800 transition-all duration-300 cursor-pointer ">+ ADD</button></div>
+        <div><  RepoDialog/></div>
       </Card>
       <Card className=" mt-10">
         <CardContent>
