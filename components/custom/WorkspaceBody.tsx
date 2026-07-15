@@ -5,26 +5,19 @@ import { UserDetailContext } from '@/app/context/UserDetailContext'
 import React, { useContext } from 'react'
 import { Card, CardContent } from "../ui/card";
 import EmptyWorkspace from "./EmptyWorkspace";
-import { Router } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { RepoDialog } from "./RepoDialog";
 
 
 
 function WorkspaceBody() {
-  const router = useRouter()
   const { userDetail } = useContext(UserDetailContext)
-
-  const onAddRepo = () => {
-    window.location.href = '/api/github'
-  }
 
 
   return (
     <div>
       <div className='flex justify-between items-center'>
-        <h4 className='text-4xl font-medium'>worksace</h4>
-        <h2 className='text-blue-800 bg-blue-100 px-2 rounded-lg'>Remaining Credits:1000{ }</h2>
+        <h4 className='text-4xl font-medium'>Workspace</h4>
+        <h2 className='text-blue-800 bg-blue-100 px-2 rounded-lg'>Remaining Credits: 1000</h2>
       </div>
 
       <Card className=" mt-5 flex justify-between p-4 border rounded-lg">
@@ -36,7 +29,7 @@ function WorkspaceBody() {
         />
         <h2 className="text-lg">connect github & add repo</h2>
 
-        <div><  RepoDialog/></div>
+        <RepoDialog />
       </Card>
       <Card className=" mt-10">
         <CardContent>
