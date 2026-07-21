@@ -1,9 +1,9 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { db, users } from "@/db";
+import { db, repositories, users } from "@/db";
 import { eq } from "drizzle-orm";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST() {
+export async function POST(req: NextRequest) {
   const clerkUser = await currentUser();
 
   if (!clerkUser) {
@@ -28,8 +28,41 @@ export async function POST() {
     user = inserted[0];
   }
 
+  const body = await req.json();
+
+  const insertedRepo = await db
+    .insert(repositories)
+    .values({
+      userId: body.userId ?? user.id,
+      repoId: body.repoId,
+      name: body.name,
+      fullName: body.fullName,
+      private: body.private,
+      htmlUrl: body.htmlUrl,
+      description: body.description,
+      updatedAt: new Date(body.updatedAt),
+      owner: body.owner,
+    })
+    .returning();
+
   return NextResponse.json({
     success: true,
     user,
+    repo: insertedRepo[0],
   });
+}
+
+
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+
+  const userId = searchParams.get("userId");
+
+  const result = await db
+    .select()
+    .from(repositories)
+    .where(eq(repositories.userId, Number(userId)));
+
+  return NextResponse.json(result);
 }
